@@ -8,10 +8,10 @@ io.on("connection", (socket) => {
         socket.join(documentName)
     })
 
-    socket.on("textEditor", ( text ) => {
+    socket.on("textEditor", ( text, documentName ) => {
         //socket.broadcast.emit("textEditorClients", text)
 
-        socket.to("JavaScript").emit("textEditorClients", text)
+        socket.to(documentName).emit("textEditorClients", text)
     })
 
     socket.on("disconnect", () => {

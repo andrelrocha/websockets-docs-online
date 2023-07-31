@@ -7,8 +7,8 @@ function selectDocument(name) {
     console.log("está vindo daqui o nome do documento: " + name)
 }
 
-function emitTextEditor(text) {
-    socket.emit("textEditor", text)
+function emitTextEditor(text, documentName) {
+    socket.emit("textEditor", text, documentName)
 }
 
 socket.on("textEditorClients", (text) => {
