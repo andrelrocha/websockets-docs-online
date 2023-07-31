@@ -1,10 +1,7 @@
 import express from 'express'
 import path from 'path'
 
-import { db } from "./db/dbConnect";
-
-db.on("error", console.log.bind(console, "Database connection error!"));
-db.once("open", () => console.log("Database connected!"));
+import "./db/dbConnect";
 
 const app = express()
 app.use(express.json())
