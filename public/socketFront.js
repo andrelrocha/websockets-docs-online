@@ -8,10 +8,15 @@ const textEditor = document.getElementById("text-editor")
 
 titleDocument.textContent = nameDocument
 
+document.addEventListener("DOMContentLoaded", () => {
+    selectDocument(nameDocument);
+});
+
+
 textEditor.addEventListener("keyup", () => {
     emitTextEditor({
         text: textEditor.value, 
-        nameDocument
+        documentName: nameDocument
     })
     selectDocument(nameDocument)
 })
