@@ -1,4 +1,6 @@
-import { emitTextEditor } from "./socket.js"
+import { emitTextEditor, selectDocument } from "./socket.js"
+
+const socket = io()
 
 const params = new URLSearchParams(window.location.search)
 const nameDocument = params.get("nome")
@@ -10,10 +12,15 @@ titleDocument.textContent = nameDocument
 
 textEditor.addEventListener("keyup", () => {
     emitTextEditor(textEditor.value)
+    
 })
 
 function setTextEditor(text) {
     textEditor.value = text
 }
+
+
+socket.on("connect", () => {
+    selectDocument(nameDocument)})
 
 export { setTextEditor }
