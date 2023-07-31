@@ -1,12 +1,16 @@
 const socket = io();
 
-const textEditor = document.getElementById("text-editor")
+function selectDocument(name) {
+    socket.emit("selectDocument", name)
+    console.log("está vindo daqui o nome do documento: " + name)
+}
 
-textEditor.addEventListener("keyup", () => {
-    console.log(textEditor.value)
-    socket.emit("textEditor", textEditor.value)
-})
+function emitTextEditor(text, documentName) {
+    socket.emit("textEditor", text, documentName)
+}
 
 socket.on("textEditorClients", (text) => {
     textEditor.value = text
 })
+
+export { emitTextEditor, selectDocument }
