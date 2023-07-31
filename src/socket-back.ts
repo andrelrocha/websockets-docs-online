@@ -23,11 +23,15 @@ function findDocument(documentName: string) {
 io.on("connection", (socket) => {
     console.log(`Usuário conectado no socket ${socket.id}`)
 
-    socket.on("selectDocument", ( documentName ) => {
+    socket.on("selectDocument", ( documentName, returnName ) => {
         socket.join(documentName)
 
         const document = findDocument(documentName)
-        console.log(document)
+
+        if (document) {
+            //socket.emit("textEditorServer", document.text)
+            returnName(document.text)
+        }
     })
 
     socket.on("textEditor", ({ text, documentName }) => {

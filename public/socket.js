@@ -3,8 +3,9 @@ import { setTextEditor } from "./socketFront.js";
 const socket = io();
 
 function selectDocument(name) {
-    socket.emit("selectDocument", name)
-    console.log("está vindo daqui o nome do documento: " + name)
+    socket.emit("selectDocument", name, (text) => {
+        setTextEditor(text)
+    })
 }
 
 function emitTextEditor(data) {
