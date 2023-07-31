@@ -5,7 +5,5 @@ io.on("connection", (socket) => {
 
     socket.on("textEditor", ( text ) => {
         socket.broadcast.emit("textEditorClients", text)
-        //emite evento para todos os clientes
-        //io.emit("textEditorClients", text)
     })
 })
