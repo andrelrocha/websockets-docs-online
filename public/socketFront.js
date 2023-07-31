@@ -17,3 +17,5 @@ function setTextEditor(text) {
     textEditor.value = text
 }
 
+
+export { setTextEditor }

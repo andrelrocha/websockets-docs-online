@@ -1,3 +1,5 @@
+import { setTextEditor } from "./socketFront.js";
+
 const socket = io();
 
 function selectDocument(name) {
@@ -10,7 +12,7 @@ function emitTextEditor(text, documentName) {
 }
 
 socket.on("textEditorClients", (text) => {
-    textEditor.value = text
+    setTextEditor(text)
 })
 
 export { emitTextEditor, selectDocument }
