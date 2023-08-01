@@ -1,8 +1,14 @@
 import { io } from "./server";
 import { findDocument, updateTextEditor } from "./UseCases/DocumentsDbGeneral";
 import { delayedReturnName } from "./UseCases/DebounceSaveText";
+import { getAllDocumentsName } from "./UseCases/GetAllDocumentsName";
 
 io.on("connection", (socket) => {
+
+    socket.on("getDocuments", async ( returnDocuments ) => {
+        const documentsNames = await getAllDocumentsName()
+        returnDocuments(documentsNames)
+    })
 
     socket.on("selectDocument", async ( documentName, returnName ) => {
         socket.join(documentName)
@@ -15,9 +21,11 @@ io.on("connection", (socket) => {
     })
 
     socket.on("textEditor", async ({ text, documentName }) => {    
-        await updateTextEditor(documentName, text)
-        
-        socket.to(documentName).emit("textEditorClients", text)
+        const update = await updateTextEditor(documentName, text)
+
+        if (update.modifiedCount > 0) {
+            socket.to(documentName).emit("textEditorClients", text)
+        }
 
         //manda para todos os clientes conectados no socket
         //socket.broadcast.emit("textEditorClients", text)

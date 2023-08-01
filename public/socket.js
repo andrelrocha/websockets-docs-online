@@ -1,4 +1,4 @@
-import { setTextEditor } from "./socketFront.js";
+import { setTextEditor } from "./socketFrontDocument.js";
 
 const socket = io();
 

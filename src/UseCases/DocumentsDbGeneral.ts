@@ -12,11 +12,13 @@ async function findDocument(documentName: string) {
 
 async function updateTextEditor(documentName: string, text: string) {
     try {
-        await Document.updateOne({ name: documentName }, { text: text })
+        const upp = await Document.updateOne({ name: documentName }, { text: text })
+        return upp
     } catch (error) {
         console.log(error)
         throw new Error("Error while trying to update text editor")
     }
 }
+
 
 export { findDocument, updateTextEditor }
