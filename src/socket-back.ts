@@ -1,23 +1,8 @@
 import { io } from "./server";
 import { findDocument, updateTextEditor } from "./UseCases/DocumentsDbGeneral";
-
-function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  }
+import { delayedReturnName } from "./UseCases/DebounceSaveText";
 
 io.on("connection", (socket) => {
-    console.log(`Usuário conectado no socket ${socket.id}`)
-
-    function handleReturnName(text, returnName) {
-        returnName(text);
-    }
-    const delayedReturnName = debounce((text, returnName) => {
-        handleReturnName(text, returnName);
-    }, 500);
 
     socket.on("selectDocument", async ( documentName, returnName ) => {
         socket.join(documentName)
@@ -28,6 +13,7 @@ io.on("connection", (socket) => {
             delayedReturnName(document.text, returnName);
         }
     })
+
     socket.on("textEditor", async ({ text, documentName }) => {    
         await updateTextEditor(documentName, text)
         
