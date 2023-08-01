@@ -1,10 +1,5 @@
 import { io } from "./server";
-import { Document } from "./db/models/Document";
-
-async function findDocument(documentName: string) {
-    const documents = await Document.findOne({ name: documentName })
-    return documents
-}
+import { findDocument } from "./UseCases/FindDocument";
 
 io.on("connection", (socket) => {
     console.log(`Usuário conectado no socket ${socket.id}`)
@@ -14,24 +9,17 @@ io.on("connection", (socket) => {
 
         const document = await findDocument(documentName)
 
-
-        console.log(document)
-
-        /*
         if (document) {
-            //socket.emit("textEditorServer", document.text)
             returnName(document.text)
         }
-        */
     })
-    socket.on("textEditor", ({ text, documentName }) => {
-        const document = findDocument(documentName)
-        /*
+    socket.on("textEditor", async ({ text, documentName }) => {
+        const document = await findDocument(documentName)
+        
         if (document) {
             document.text = text
             socket.to(documentName).emit("textEditorClients", text)
         }
-        */
 
         //manda para todos os clientes conectados no socket
         //socket.broadcast.emit("textEditorClients", text)
