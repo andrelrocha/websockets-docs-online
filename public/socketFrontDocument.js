@@ -1,10 +1,11 @@
-import { emitTextEditor, selectDocument } from "./socket.js"
+import { emitDeleteDocument, emitTextEditor, selectDocument } from "./socket.js"
 
 const params = new URLSearchParams(window.location.search)
 const nameDocument = params.get("nome")
 
 const titleDocument = document.getElementById("document-title")
 const textEditor = document.getElementById("text-editor")
+const deleteDocument = document.getElementById("delete-document")
 
 titleDocument.textContent = nameDocument
 
@@ -19,6 +20,10 @@ textEditor.addEventListener("keyup", () => {
         documentName: nameDocument
     })
     selectDocument(nameDocument)
+})
+
+deleteDocument.addEventListener("click", () => {
+    emitDeleteDocument(nameDocument)
 })
 
 function setTextEditor(text) {

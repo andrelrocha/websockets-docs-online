@@ -1,6 +1,7 @@
 import { io } from "./server";
 import { addDocument } from "./UseCases/AddDocument";
 import { delayedReturnName } from "./UseCases/DebounceSaveText";
+import { deleteDocument } from "./UseCases/DeleteDocument";
 import { findDocument, updateTextEditor } from "./UseCases/DocumentsDbGeneral";
 import { getAllDocumentsName } from "./UseCases/GetAllDocumentsName";
 
@@ -16,6 +17,14 @@ io.on("connection", (socket) => {
 
         if (result) {
             io.emit("addDocumentClientsInterface", documentName)
+        }
+    })
+
+    socket.on("deleteDocument", async ( documentName ) => {
+        const result = await deleteDocument(documentName)
+
+        if (result) {
+            io.emit("deleteDocumentClientsInterface", documentName)
         }
     })
 

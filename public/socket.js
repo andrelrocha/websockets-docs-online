@@ -2,6 +2,14 @@ import { setTextEditor } from "./socketFrontDocument.js";
 
 const socket = io();
 
+socket.on("textEditorClients", (text) => {
+    setTextEditor(text)
+})
+
+socket.on("deleteDocumentClientsInterface", (name) => {
+    window.location.href = "/index.html";
+})
+
 function selectDocument(name) {
     socket.emit("selectDocument", name, (text) => {
         setTextEditor(text)
@@ -12,8 +20,8 @@ function emitTextEditor(data) {
     socket.emit("textEditor", data)
 }
 
-socket.on("textEditorClients", (text) => {
-    setTextEditor(text)
-})
+function emitDeleteDocument(name) {
+    socket.emit("deleteDocument", name)
+}
 
-export { emitTextEditor, selectDocument }
+export { emitTextEditor, selectDocument, emitDeleteDocument }

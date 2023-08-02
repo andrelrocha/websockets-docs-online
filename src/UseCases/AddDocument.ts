@@ -8,8 +8,10 @@ async function addDocument(documentName: string) {
             throw new Error("Document already exists")
         }
 
+        const name = documentName.charAt(0).toUpperCase() + documentName.slice(1)
+
         const newDocument = await Document.create({ 
-            name: documentName,
+            name,
         })
 
         return newDocument
