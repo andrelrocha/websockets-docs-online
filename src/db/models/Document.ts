@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 
 const documentSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     text: {
         type: String,
         default: "",
-        required: true
     },
 })
 

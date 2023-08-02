@@ -1,6 +1,7 @@
 import { io } from "./server";
-import { findDocument, updateTextEditor } from "./UseCases/DocumentsDbGeneral";
+import { addDocument } from "./UseCases/AddDocument";
 import { delayedReturnName } from "./UseCases/DebounceSaveText";
+import { findDocument, updateTextEditor } from "./UseCases/DocumentsDbGeneral";
 import { getAllDocumentsName } from "./UseCases/GetAllDocumentsName";
 
 io.on("connection", (socket) => {
@@ -8,6 +9,14 @@ io.on("connection", (socket) => {
     socket.on("getDocuments", async ( returnDocuments ) => {
         const documentsNames = await getAllDocumentsName()
         returnDocuments(documentsNames)
+    })
+
+    socket.on("addDocument", async ( documentName ) => {
+        const result = await addDocument(documentName)
+
+        if (result) {
+            io.emit("addDocumentClientsInterface", documentName)
+        }
     })
 
     socket.on("selectDocument", async ( documentName, returnName ) => {
