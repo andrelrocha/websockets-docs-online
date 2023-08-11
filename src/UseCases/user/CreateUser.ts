@@ -19,16 +19,19 @@ async function createUser({ userName, password }: IRequestLogin) {
             throw new Error("User already exists");
         }
 
-        
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         await User.create({ 
             userName, 
-            password
+            password: hashedPassword  
         });
         
         console.log("User created successfully");
+        return true;
     } catch (error) {
         console.error("Error creating user:", error);
+        return false;
     }
 }
 
