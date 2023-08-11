@@ -1,21 +1,27 @@
-import { User } from "../models/User"; // Verifique o caminho correto para o modelo User
-
+import { User } from "../models/User";
 const users = [
     {
         name: "Alice",
+        userName: "alice123",
+        password: "password123"
     },
     {
-        name: "Bob",
+        userName: "bob456",
+        password: "securepass"
     },
     {
         name: "Charlie",
+        userName: "charlie789",
+        password: "myp@ssw0rd"
     },
     {
-        name: "Dave",
+        userName: "david987",
+        password: "strongPassword"
     },
     {
-        name: "Eve",
-    },
+        userName: "emily654",
+        password: "12345678"
+    }
 ];
 
 async function populateUserCollection() {
