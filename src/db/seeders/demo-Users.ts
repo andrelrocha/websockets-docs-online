@@ -1,26 +1,24 @@
 import { User } from "../models/User";
 const users = [
     {
-        name: "Alice",
-        userName: "alice123",
-        password: "password123"
+        userName: "indiana",
+        password: "secure123"
     },
     {
-        userName: "bob456",
-        password: "securepass"
+        userName: "papoco",
+        password: "pass1234"
     },
     {
-        name: "Charlie",
-        userName: "charlie789",
-        password: "myp@ssw0rd"
+        userName: "andre",
+        password: "strongpass"
     },
     {
-        userName: "david987",
-        password: "strongPassword"
+        userName: "lucio",
+        password: "password2023"
     },
     {
-        userName: "emily654",
-        password: "12345678"
+        userName: "andre lucio",
+        password: "mypassword"
     }
 ];
 
