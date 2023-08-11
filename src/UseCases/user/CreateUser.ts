@@ -1,4 +1,5 @@
 import { User } from "../../db/models/User";
+import { createHashSaltPassword } from "../utils/createHashSaltPassword";
 
 
 interface IRequestLogin {
@@ -18,9 +19,12 @@ async function createUser({ userName, password }: IRequestLogin) {
             throw new Error("User already exists");
         }
 
+        const { hashedPassword, salt } = createHashSaltPassword(password);
+
         await User.create({ 
             userName, 
-            password
+            password: hashedPassword,
+            salt
         });
         
         console.log("User created successfully");
