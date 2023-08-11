@@ -1,5 +1,5 @@
-import { addDocument } from "../UseCases/AddDocument"
-import { getAllDocumentsName } from "../UseCases/GetAllDocumentsName"
+import { addDocument } from "../UseCases/document/AddDocument"
+import { getAllDocumentsName } from "../UseCases/document/GetAllDocumentsName"
 
 function registerEventsIndex(socket, io) {
     socket.on("getDocuments", async ( returnDocuments ) => {

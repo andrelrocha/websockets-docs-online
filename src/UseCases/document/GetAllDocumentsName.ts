@@ -1,4 +1,4 @@
-import { Document } from "../db/models/Document"
+import { Document } from "../../db/models/Document"
 
 async function getAllDocumentsName() {
     try {

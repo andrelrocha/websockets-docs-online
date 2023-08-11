@@ -1,6 +1,7 @@
+import { populateUserCollection } from "./db/seeders/demo-Users";
 import { registerEventsCreateUser } from "./registerEvents/createUser";
-import { registerEventsDocument } from "./registerEvents/document";
-import { registerEventsIndex } from "./registerEvents";
+import { registerEventsDocument } from "./registerEvents/documentPage";
+import { registerEventsIndex } from "./registerEvents/indexPage";
 import { io } from "./server";
 
 io.on("connection", (socket) => {

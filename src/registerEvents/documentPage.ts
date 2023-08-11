@@ -1,6 +1,6 @@
-import { delayedReturnName } from "../UseCases/DebounceSaveText"
-import { deleteDocument } from "../UseCases/DeleteDocument"
-import { findDocument, updateTextEditor } from "../UseCases/DocumentsDbGeneral"
+import { delayedReturnName } from "../UseCases/document/DebounceSaveText"
+import { deleteDocument } from "../UseCases/document/DeleteDocument"
+import { findDocument, updateTextEditor } from "../UseCases/document/DocumentsDbGeneral"
 
 function registerEventsDocument(socket, io) {
     socket.on("deleteDocument", async ( documentName ) => {
