@@ -1,6 +1,6 @@
-import { registerEventsCreateUser } from "./registerEvents/RegisterEventsCreateUser";
-import { registerEventsDocument } from "./registerEvents/registerEventsDocument";
-import { registerEventsIndex } from "./registerEvents/registerEventsIndex";
+import { registerEventsCreateUser } from "./registerEvents/createUser";
+import { registerEventsDocument } from "./registerEvents/document";
+import { registerEventsIndex } from "./registerEvents";
 import { io } from "./server";
 
 io.on("connection", (socket) => {
