@@ -1,6 +1,7 @@
 import { registerEventsCreateUser } from "./registerEvents/createUser";
 import { registerEventsDocument } from "./registerEvents/documentPage";
 import { registerEventsIndex } from "./registerEvents/indexPage";
+import { registerEventsLogin } from "./registerEvents/loginPage";
 import { io } from "./server";
 
 io.on("connection", (socket) => {
@@ -11,6 +12,8 @@ io.on("connection", (socket) => {
     registerEventsDocument(socket, io)    
 
     registerEventsCreateUser(socket, io)
+
+    registerEventsLogin(socket, io)
 
     socket.on("disconnect", () => {
         console.log(`Usuário desconectado no socket ${socket.id}`)

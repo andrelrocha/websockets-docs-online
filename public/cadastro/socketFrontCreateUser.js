@@ -6,6 +6,9 @@ function emitCreateUser(data) {
 
 socket.on("createUserSucessful", () => {
     alert("Usuário criado com sucesso!");
+
+    document.getElementById('input-user').value = '';
+    document.getElementById('input-password').value = '';
 })
 
 socket.on("createUserError", () => {

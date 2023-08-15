@@ -1,6 +1,6 @@
-import { emitCreateUser } from "./socketFrontCreateUser.js";
+import { emitAuthenticateUser } from "./socketFrontLoginUser.js";
 
-const form = document.getElementById('form-cadastro');
+const form = document.getElementById('form-login');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -8,5 +8,5 @@ form.addEventListener('submit', (event) => {
     const userName = form["input-user"].value;
     const password = form["input-password"].value;
     
-    emitCreateUser({ userName, password })
+    emitAuthenticateUser({ userName, password })
 })

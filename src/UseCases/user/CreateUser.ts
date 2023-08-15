@@ -2,12 +2,12 @@ import { User } from "../../db/models/User";
 import { createHashSaltPassword } from "../utils/createHashSaltPassword";
 
 
-interface IRequestLogin {
+interface IRequestCadastro {
     userName: string;
     password: string;
 }
 
-async function createUser({ userName, password }: IRequestLogin) {
+async function createUser({ userName, password }: IRequestCadastro) {
     try {
         if (!userName || !password) {
             throw new Error("Missing required fields");
