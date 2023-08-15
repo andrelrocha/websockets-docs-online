@@ -1,3 +1,4 @@
+import { authorizeUser } from "./middlewares/authorizeUser";
 import { registerEventsCreateUser } from "./registerEvents/createUser";
 import { registerEventsDocument } from "./registerEvents/documentPage";
 import { registerEventsIndex } from "./registerEvents/indexPage";
@@ -6,6 +7,9 @@ import { io } from "./server";
 
 import dotenv from "dotenv";
 dotenv.config();
+
+//middleare de autenticação
+io.use(authorizeUser);
 
 io.on("connection", (socket) => {
     console.log(`Usuário conectado no socket ${socket.id}`)
