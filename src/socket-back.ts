@@ -8,21 +8,18 @@ import { io } from "./server";
 import dotenv from "dotenv";
 dotenv.config();
 
+const nspUsers = io.of("/users");
+
 //middleare de autenticação
-io.use(authorizeUser);
+nspUsers.use(authorizeUser);
 
-io.on("connection", (socket) => {
-    console.log(`Usuário conectado no socket ${socket.id}`)
+nspUsers.on("connection", (socket) => {   
+    registerEventsIndex(socket, nspUsers)
+})
 
-    registerEventsIndex(socket, io)
-
+io.of("/").on("connection", (socket) => {
+    registerEventsCreateUser(socket, io)
+    registerEventsLogin(socket, io)
     registerEventsDocument(socket, io)    
 
-    registerEventsCreateUser(socket, io)
-
-    registerEventsLogin(socket, io)
-
-    socket.on("disconnect", () => {
-        console.log(`Usuário desconectado no socket ${socket.id}`)
-    })    
 })
