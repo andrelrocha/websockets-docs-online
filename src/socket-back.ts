@@ -1,4 +1,4 @@
-import { authorizeUser } from "./middlewares/authorizeUser";
+import { authorizeUser } from "./middlewares/authorizeUserMiddleware";
 import { registerEventsCreateUser } from "./registerEvents/createUser";
 import { registerEventsDocument } from "./registerEvents/documentPage";
 import { registerEventsIndex } from "./registerEvents/indexPage";

@@ -7,20 +7,19 @@ const socket = io("/users", {
     }
 });
 
-//evento padrãdo socket.io
 socket.on("connect_error", (err) => {
-    alert(err);
+    alert("Non authorized");
     window.location.href = "/login/index.html";
-});
-
-socket.on("addDocumentClientsInterface", (documentName) => {
-    insertLinkDocument(documentName);
 });
 
 socket.emit("getDocuments", (documents) => {
     documents.forEach((document) => {
         insertLinkDocument(document.name);
     })
+});
+
+socket.on("addDocumentClientsInterface", (documentName) => {
+    insertLinkDocument(documentName);
 });
 
 function emitAddDocument(documentName) {

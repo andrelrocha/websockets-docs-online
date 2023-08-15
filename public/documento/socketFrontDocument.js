@@ -1,4 +1,4 @@
-import { emitDeleteDocument, emitTextEditor, selectDocument } from "./socket.js"
+import { emitDeleteDocument, emitTextEditor, selectDocument } from "./document.js"
 
 const params = new URLSearchParams(window.location.search)
 const nameDocument = params.get("nome")
@@ -12,7 +12,6 @@ titleDocument.textContent = nameDocument
 document.addEventListener("DOMContentLoaded", () => {
     selectDocument(nameDocument);
 });
-
 
 textEditor.addEventListener("keyup", () => {
     emitTextEditor({
