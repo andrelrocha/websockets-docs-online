@@ -4,6 +4,9 @@ import { registerEventsIndex } from "./registerEvents/indexPage";
 import { registerEventsLogin } from "./registerEvents/loginPage";
 import { io } from "./server";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 io.on("connection", (socket) => {
     console.log(`Usuário conectado no socket ${socket.id}`)
 
