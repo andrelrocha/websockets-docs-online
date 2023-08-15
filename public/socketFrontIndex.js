@@ -8,7 +8,7 @@ const socket = io("/users", {
 });
 
 socket.on("connect_error", (err) => {
-    alert("Non authorized");
+    alert("Non authorized: " + err);
     window.location.href = "/login/index.html";
 });
 

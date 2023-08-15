@@ -15,11 +15,10 @@ nspUsers.use(authorizeUser);
 
 nspUsers.on("connection", (socket) => {   
     registerEventsIndex(socket, nspUsers)
+    registerEventsDocument(socket, nspUsers)    
 })
 
 io.of("/").on("connection", (socket) => {
     registerEventsCreateUser(socket, io)
     registerEventsLogin(socket, io)
-    registerEventsDocument(socket, io)    
-
 })

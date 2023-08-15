@@ -8,7 +8,7 @@ function authorizeUser (socket, next) {
 
         next();
     } catch (err) {
-        next(new Error(`Unauthorized: ${err.message}`));
+        next(err);
     }
 }
 
