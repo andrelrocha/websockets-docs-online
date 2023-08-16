@@ -9,8 +9,15 @@ const deleteDocument = document.getElementById("delete-document")
 
 titleDocument.textContent = nameDocument
 
+function handleAuthorizationSuccess(payloadToken) {
+    selectDocument({
+        nameDocument, 
+        userName: payloadToken.userName
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    selectDocument(nameDocument);
+    //selectDocument(nameDocument);
 });
 
 textEditor.addEventListener("keyup", () => {
@@ -30,4 +37,4 @@ function setTextEditor(text) {
 }
 
 
-export { setTextEditor }
+export { handleAuthorizationSuccess, setTextEditor }

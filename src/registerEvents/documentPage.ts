@@ -11,7 +11,7 @@ function registerEventsDocument(socket, io) {
         }
     })
 
-    socket.on("selectDocument", async ( documentName, returnName ) => {
+    socket.on("selectDocument", async ({ documentName, userName }, returnName ) => {
         socket.join(documentName)
 
         const document = await findDocument(documentName)

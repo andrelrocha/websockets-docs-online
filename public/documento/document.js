@@ -1,11 +1,13 @@
 import { getCookie } from "../utils/cookies.js";
-import { setTextEditor } from "./socketFrontDocument.js";
+import { handleAuthorizationSuccess, setTextEditor } from "./socketFrontDocument.js";
 
 const socket = io("/users", {
     auth: {
         token: getCookie("tokenJwt")
     }
 });
+
+socket.on("user-authorized", handleAuthorizationSuccess);
 
 socket.on("connect_error", (err) => {
     alert("Non authorized: " + err);
@@ -20,8 +22,8 @@ socket.on("deleteDocumentClientsInterface", (name) => {
     window.location.href = "/index.html";
 })
 
-function selectDocument(name) {
-    socket.emit("selectDocument", name, (text) => {
+function selectDocument(data) {
+    socket.emit("selectDocument", data, (text) => {
         setTextEditor(text)
     })
 }
