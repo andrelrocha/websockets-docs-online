@@ -11,10 +11,10 @@ function registerEventsDocument(socket, io) {
         }
     })
 
-    socket.on("selectDocument", async ( documentName, returnName ) => {
-        socket.join(documentName)
+    socket.on("selectDocument", async ({ nameDocument, userName }, returnName ) => {
+        socket.join(nameDocument)
 
-        const document = await findDocument(documentName)
+        const document = await findDocument(nameDocument)
 
         if (document) {
             delayedReturnName(document.text, returnName);
