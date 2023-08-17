@@ -1,5 +1,5 @@
 import { getCookie } from "../utils/cookies.js";
-import { handleAuthorizationSuccess, setTextEditor } from "./socketFrontDocument.js";
+import { handleAuthorizationSuccess, updateInterfaceUsersOnDocument, setTextEditor } from "./socketFrontDocument.js";
 
 
 const socket = io("/users", {
@@ -22,6 +22,8 @@ socket.on("textEditorClients", (text) => {
 socket.on("deleteDocumentClientsInterface", (name) => {
     window.location.href = "/index.html";
 })
+
+socket.on("usersOnDocument", updateInterfaceUsersOnDocument);
 
 function selectDocument(data) {
     socket.emit("selectDocument", data, (text) => {

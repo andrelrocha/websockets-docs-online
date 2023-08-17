@@ -21,7 +21,8 @@ function registerEventsDocument(socket, io) {
             addConnection({ documentName, userName });
 
             const usersOnDocument = getUsersDocument(documentName);
-            console.log(usersOnDocument)
+
+            io.to(documentName).emit("usersOnDocument", usersOnDocument);
 
             delayedReturnName(document.text, returnName);
         }

@@ -6,6 +6,7 @@ const documentName = params.get("nome")
 const titleDocument = document.getElementById("document-title")
 const textEditor = document.getElementById("text-editor")
 const deleteDocument = document.getElementById("delete-document")
+const listConnectedUsers = document.getElementById("connected-users")
 
 titleDocument.textContent = documentName
 
@@ -13,6 +14,15 @@ function handleAuthorizationSuccess(payloadToken) {
     selectDocument({
         documentName,
         userName: payloadToken.userName
+    })
+}
+
+function updateInterfaceUsersOnDocument(usersOnDocument) {
+    listConnectedUsers.innerHTML = ""
+    usersOnDocument.forEach(user => {
+        listConnectedUsers.innerHTML += `
+            <li class="list-group-item">${user}</li>
+        `
     })
 }
 
@@ -32,4 +42,4 @@ function setTextEditor(text) {
 }
 
 
-export { handleAuthorizationSuccess, setTextEditor }
+export { handleAuthorizationSuccess, updateInterfaceUsersOnDocument, setTextEditor }
