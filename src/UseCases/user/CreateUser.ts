@@ -1,5 +1,5 @@
 import { User } from "../../db/models/User";
-import { createHashSaltPassword } from "../utils/createHashSaltPassword";
+import { createHashSaltPassword } from "../../utils/createHashSaltPassword";
 
 
 interface IRequestCadastro {

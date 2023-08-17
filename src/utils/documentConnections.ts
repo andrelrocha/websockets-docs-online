@@ -15,4 +15,13 @@ function getUsersDocument(documentName: string) {
             .map(connection => connection.userName);
 }
 
-export { addConnection, getUsersDocument }
+function removeConnection({ documentName, userName }: DataConnection) {
+    const index = documentConnections
+                    .findIndex(connection => connection.documentName === documentName && connection.userName === userName);
+
+    if (index !== -1) {
+        documentConnections.splice(index, 1);
+    }
+}
+
+export { addConnection, getUsersDocument, removeConnection }

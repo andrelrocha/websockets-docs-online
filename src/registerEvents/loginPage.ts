@@ -1,5 +1,5 @@
 import { authenticateUser } from "../UseCases/user/AuthenticateUser";
-import { generateJwt } from "../UseCases/utils/generateJwt";
+import { generateJwt } from "../utils/generateJwt";
 
 function registerEventsLogin(socket, io) {
     socket.on('authenticateUser', async (data) => {

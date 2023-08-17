@@ -1,7 +1,7 @@
 import { delayedReturnName } from "../UseCases/document/DebounceSaveText"
 import { deleteDocument } from "../UseCases/document/DeleteDocument"
 import { findDocument, updateTextEditor } from "../UseCases/document/DocumentsDbGeneral"
-import { addConnection, getUsersDocument } from "../UseCases/utils/documentConnections"
+import { addConnection, getUsersDocument, removeConnection } from "../utils/documentConnections"
 
 function registerEventsDocument(socket, io) {
     socket.on("selectDocument", async ({ documentName, userName }, returnName ) => {
@@ -36,7 +36,11 @@ function registerEventsDocument(socket, io) {
         })
 
         socket.on("disconnect", () => {
-            
+            removeConnection({ documentName, userName });
+
+            const usersOnDocument = getUsersDocument(documentName);
+
+            io.to(documentName).emit("usersOnDocument", usersOnDocument);
         })
     })
 }
