@@ -15,6 +15,10 @@ function registerEventsDocument(socket, io) {
 
                 addConnection({ documentName, userName });
 
+                socket.data = {
+                    userOnDocument: true,
+                };
+
                 const usersOnDocument = getUsersDocument(documentName);
 
                 io.to(documentName).emit("usersOnDocument", usersOnDocument);
@@ -42,6 +46,8 @@ function registerEventsDocument(socket, io) {
         })
 
         socket.on("disconnect", () => {
+            if (socket.data.userOnDocument) return;
+            
             removeConnection({ documentName, userName });
 
             const usersOnDocument = getUsersDocument(documentName);
