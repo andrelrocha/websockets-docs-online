@@ -9,6 +9,13 @@ function addConnection(dataConnection: DataConnection) {
     documentConnections.push(dataConnection);
 }
 
+function findConnection({ documentName, userName }: DataConnection) {
+    const userConnection = documentConnections
+                    .find(connection => connection.documentName === documentName && connection.userName === userName);
+
+    return userConnection;
+}
+
 function getUsersDocument(documentName: string) {
     return documentConnections
             .filter(connection => connection.documentName === documentName)
@@ -24,4 +31,4 @@ function removeConnection({ documentName, userName }: DataConnection) {
     }
 }
 
-export { addConnection, getUsersDocument, removeConnection }
+export { addConnection, findConnection, getUsersDocument, removeConnection }

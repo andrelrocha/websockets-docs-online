@@ -23,6 +23,11 @@ socket.on("deleteDocumentClientsInterface", (name) => {
     window.location.href = "/index.html";
 })
 
+socket.on("userAlreadyOnDocument", () => {
+    alert("User already on document in another tab")
+    window.location.href = "/";
+})
+
 socket.on("usersOnDocument", updateInterfaceUsersOnDocument);
 
 function selectDocument(data) {

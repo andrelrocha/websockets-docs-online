@@ -1,22 +1,28 @@
 import { delayedReturnName } from "../UseCases/document/DebounceSaveText"
 import { deleteDocument } from "../UseCases/document/DeleteDocument"
 import { findDocument, updateTextEditor } from "../UseCases/document/DocumentsDbGeneral"
-import { addConnection, getUsersDocument, removeConnection } from "../utils/documentConnections"
+import { addConnection, findConnection, getUsersDocument, removeConnection } from "../utils/documentConnections"
 
 function registerEventsDocument(socket, io) {
     socket.on("selectDocument", async ({ documentName, userName }, returnName ) => {
         const document = await findDocument(documentName)
 
         if (document) {
-            socket.join(documentName);
+            const connectionFound = findConnection({ documentName, userName });
 
-            addConnection({ documentName, userName });
+            if (!connectionFound) {
+                socket.join(documentName);
 
-            const usersOnDocument = getUsersDocument(documentName);
+                addConnection({ documentName, userName });
 
-            io.to(documentName).emit("usersOnDocument", usersOnDocument);
+                const usersOnDocument = getUsersDocument(documentName);
 
-            delayedReturnName(document.text, returnName);
+                io.to(documentName).emit("usersOnDocument", usersOnDocument);
+
+                delayedReturnName(document.text, returnName);
+            } else {
+                socket.emit("userAlreadyOnDocument", "User already connected to this document");
+            }
         }
 
         socket.on("textEditor", async ({ text, documentName }) => {    
