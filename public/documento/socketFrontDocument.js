@@ -1,17 +1,17 @@
 import { emitDeleteDocument, emitTextEditor, selectDocument } from "./document.js"
 
 const params = new URLSearchParams(window.location.search)
-const nameDocument = params.get("nome")
+const documentName = params.get("nome")
 
 const titleDocument = document.getElementById("document-title")
 const textEditor = document.getElementById("text-editor")
 const deleteDocument = document.getElementById("delete-document")
 
-titleDocument.textContent = nameDocument
+titleDocument.textContent = documentName
 
 function handleAuthorizationSuccess(payloadToken) {
     selectDocument({
-        nameDocument,
+        documentName,
         userName: payloadToken.userName
     })
 }
@@ -19,12 +19,12 @@ function handleAuthorizationSuccess(payloadToken) {
 textEditor.addEventListener("keyup", () => {
     emitTextEditor({
         text: textEditor.value, 
-        documentName: nameDocument
+        documentName
     })
 })
 
 deleteDocument.addEventListener("click", () => {
-    emitDeleteDocument(nameDocument)
+    emitDeleteDocument(documentName)
 })
 
 function setTextEditor(text) {
