@@ -1,6 +1,7 @@
 import { getCookie } from "../utils/cookies.js";
 import { setTextEditor } from "./socketFrontDocument.js";
 
+
 const socket = io("/users", {
     auth: {
         token: getCookie("tokenJwt")
